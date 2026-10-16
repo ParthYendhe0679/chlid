@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+/* Design tokens from DESIGN.md: "Soft Clay & Calm Bento (Pop Sticker Edition)" */
+@theme {
+  --color-canvas: #f5f1e8;
+  --color-canvas-cool: #eef1f6;
+  --color-ink: #1c1b2b;
+  --color-ink-soft: #3a3850;
+  --color-muted: #625f78;
+  --color-faint: #9794ab;
+  --color-line: #e8e2d6;
+  --color-line-cool: #e3e7ef;
+  --color-pill: #1c1b22;
+
+  --color-purple: #7b5cf0;
+  --color-purple-deep: #5a3dd4;
+  --color-lavender: #c6b5f6;
+  --color-lavender-soft: #ece5fe;
+  --color-sun: #fad47f;
+  --color-sun-soft: #fef3d6;
+  --color-sun-deep: #a86f00;
+  --color-coral: #f08a6c;
+  --color-coral-soft: #fde3d9;
+  --color-coral-deep: #c4502f;
+  --color-mint: #d0e8ba;
+  --color-mint-soft: #e8f4dc;
+  --color-mint-deep: #3f8a2e;
+  --color-sky: #c4def8;
+  --color-sky-soft: #e3effc;
+  --color-sky-deep: #2f6fbf;
+  --color-pink: #f9cbc9;
+  --color-pink-soft: #fde4e2;
+  --color-pink-deep: #c9544f;
+  --color-cream: #fdeedc;
+  --color-star: #ffc23d;
+
+  --color-success: #23864b;
+  --color-success-soft: #dcf2e4;
+  --color-warning: #a4660a;
+  --color-warning-soft: #fff0d4;
+  --color-danger: #c93535;
+  --color-danger-soft: #fde2e2;
+  --color-info: #2f6fbf;
+  --color-info-soft: #e3effc;
+
+  --font-display: var(--font-unbounded), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --shadow-clay: 0 18px 34px -16px rgb(62 44 130 / 0.26), inset 0 -6px 12px rgb(40 22 96 / 0.07), inset 0 6px 12px rgb(255 255 255 / 0.9);
+  --shadow-clay-sm: 0 10px 20px -12px rgb(62 44 130 / 0.3), inset 0 -3px 6px rgb(40 22 96 / 0.06), inset 0 3px 6px rgb(255 255 255 / 0.85);
+  --shadow-clay-lg: 0 30px 60px -24px rgb(62 44 130 / 0.32), inset 0 -8px 16px rgb(40 22 96 / 0.07), inset 0 8px 16px rgb(255 255 255 / 0.9);
+  --shadow-pop: 3px 3px 0 #1c1b2b;
+  --shadow-pop-lg: 5px 5px 0 #1c1b2b;
+  --shadow-soft: 0 1px 2px rgb(28 27 43 / 0.05), 0 8px 24px -14px rgb(28 27 43 / 0.16);
+  --shadow-float: 0 24px 48px -18px rgb(28 27 43 / 0.35);
+
+  --animate-shimmer: shimmer 1.6s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-scan: scan 1.8s linear infinite;
+  --animate-blink: blink 1s steps(1) infinite;
+
+  @keyframes shimmer {
+    from { background-position: -800px 0; }
+    to { background-position: 800px 0; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes scan {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(400%); }
+  }
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+}
+
+@utility bg-dots {
+  background-color: var(--color-canvas);
+  background-image: radial-gradient(rgb(28 27 43 / 0.09) 1.1px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+@utility bg-dots-cool {
+  background-color: var(--color-canvas-cool);
+  background-image: radial-gradient(rgb(28 27 43 / 0.05) 1px, transparent 1.1px);
+  background-size: 24px 24px;
+}
+@utility bg-speed {
+  background-image: repeating-linear-gradient(0deg, rgb(0 0 0 / 0.035) 0 2px, transparent 2px 7px);
+}
+@utility skeleton {
+  background: linear-gradient(90deg, #ece7dd 0, #f7f3ec 40%, #ece7dd 80%);
+  background-size: 800px 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background-color: var(--color-canvas);
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+h1, h2 {
+  text-wrap: balance;
+}
+:focus-visible {
+  outline: 3px solid var(--color-purple);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
