@@ -14,7 +14,6 @@ import { ApiError } from "@/lib/api/errors";
 import { loginSchema, type LoginForm as LoginValues } from "@/lib/validation/schemas";
 import { useFieldError } from "@/lib/utils/use-form-error";
 import { roleHome } from "@/lib/permissions";
-import { DEMO_MODE } from "@/lib/api/client";
 
 /** Only same-site relative paths are accepted as a post-login target (prevents open redirects). */
 function safeNext(next: string | null): string | null {
@@ -80,14 +79,6 @@ export function LoginForm() {
         <Link href="/register" className="font-bold text-purple-deep underline">{tc("register")}</Link>
       </p>
       <p className="mt-2 text-xs text-muted">{t("agencyNote")}</p>
-      {DEMO_MODE && (
-        <div className="mt-6 rounded-2xl bg-sun-soft p-3 text-xs">
-          <p className="font-bold">Demo accounts (synthetic, password Demo@1234)</p>
-          <ul className="mt-1 space-y-0.5 font-mono">
-            <li>parent@demo.in, parent2@demo.in</li><li>worker@demo.in, doctor@demo.in</li><li>admin@demo.in</li>
-          </ul>
-        </div>
-      )}
     </div>
   );
 }

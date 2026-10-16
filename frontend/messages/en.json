@@ -141,7 +141,7 @@
     "consentLabel": "I have read this and I agree.",
     "createAccount": "Create account",
     "haveAccount": "Already have an account?",
-    "otpNote": "In the demo, one-time passwords are simulated."
+    "otpNote": "A one-time password (OTP) is asked only if two-factor login is turned on for your account."
   },
   "home": {
     "kicker": "Adoption in India",
@@ -1041,7 +1041,16 @@
     "when": "When",
     "target": "Target",
     "noAudit": "No entries",
-    "auditReadOnly": "This log is read-only. Entries cannot be edited or deleted."
+    "auditReadOnly": "This log is read-only. Entries cannot be edited or deleted.",
+    "markReviewed": "Mark reviewed",
+    "markUnreviewed": "Mark not reviewed",
+    "reviewedBadge": "Reviewed",
+    "newBadge": "New",
+    "reviewUpdated": "Report updated",
+    "kbSources": "Sources in the knowledge base",
+    "kbParts": "{count} parts",
+    "kbNone": "No sources yet",
+    "kbModel": "Search model: {model}"
   },
   "risk": {
     "predicted": "Predicted risk",
@@ -1143,5 +1152,13 @@
         "body": "Child identities are protected. Sensitive actions are recorded."
       }
     }
+  },
+  "notifications": {
+    "label": "Notifications",
+    "labelUnread": "Notifications, {count} unread",
+    "title": "Notifications",
+    "markAll": "Mark all read",
+    "empty": "No notifications yet",
+    "error": "Could not load notifications"
   }
 }

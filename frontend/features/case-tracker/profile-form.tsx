@@ -25,7 +25,7 @@ function toDefaults(a: ApplicationMe | null): Partial<Values> {
   if (!a) return { marital_status: "MARRIED", existing_children: 0, pref_age_group: "0-2", pref_gender: "ANY", pref_states: [], open_special_needs: false, open_siblings: false };
   return {
     marital_status: a.marital_status, years_married: a.years_married ?? undefined, applicant_dob: a.applicant_dob, spouse_dob: a.spouse_dob ?? undefined,
-    existing_children: a.existing_children ?? 0, annual_income_inr: a.annual_income_inr ?? undefined, state: a.state, district: a.district,
+    existing_children: a.existing_children ?? 0, annual_income_inr: a.annual_income_inr ?? undefined, state: a.state, district: a.district, address: a.address ?? undefined,
     pref_age_group: a.pref_age_group, pref_gender: a.pref_gender, pref_states: a.pref_states ?? [],
     open_special_needs: a.open_special_needs ?? false, open_siblings: a.open_siblings ?? false,
   };

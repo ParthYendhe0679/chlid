@@ -6,15 +6,16 @@ Next.js 16 (App Router), TypeScript strict, Tailwind v4, TanStack Query, React H
 
 ```bash
 cd frontend
-cp .env.example .env.local      # set NEXT_PUBLIC_API_URL to the Go API (default http://localhost:8080/api/v1)
+echo NEXT_PUBLIC_API_URL=http://localhost:8080/api/v1 > .env.local
 npm install
 npm run dev                     # http://localhost:3000
 npm run typecheck && npm run lint && npm test && npm run build
 ```
 
-## Demo mode (no backend)
+## Backend
 
-Set `NEXT_PUBLIC_DEMO_MODE=true`. A banner shows on every page and all API calls go to synthetic in-memory data (`lib/demo/handlers.ts`). Accounts: parent@demo.in, parent2@demo.in (has a referral), worker@demo.in, doctor@demo.in, admin@demo.in; password `Demo@1234`. Never enable this in production. It does not run real AI.
+All data comes from the Go API in `../backend` (see its README). There is no demo or mock mode: start the API
+first, then `npm run dev` (or `npm run build && npm run start`).
 
 ## Hero images
 

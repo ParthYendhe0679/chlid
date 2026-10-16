@@ -14,6 +14,7 @@ import { navByRole, requiredRoleFor, roleHome } from "@/lib/permissions";
 import { Button, buttonClass } from "@/components/ui/button";
 import { PageSkeleton, EmptyState } from "@/components/ui/feedback";
 import { LangSwitcher, Logo } from "./brand";
+import { NotificationBell } from "./notification-bell";
 import type { Role } from "@/types";
 
 const icons = {
@@ -92,6 +93,7 @@ export function RoleShell({ role, children }: { role: Role; children: React.Reac
           </nav>
           <div className="flex items-center gap-2">
             <LangSwitcher />
+            <NotificationBell />
             <span className="hidden text-sm font-semibold lg:inline" title={user?.full_name}>{user?.full_name}</span>
             <Button
               variant="secondary"

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useQueryClient } from "@tanstack/react-query";
 import { Globe, HeartHandshake } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { LANG_LABEL, setLocaleCookie } from "@/lib/utils/locale";
@@ -21,6 +22,7 @@ export function Logo({ href = "/" }: { href?: string }) {
 export function LangSwitcher() {
   const locale = useLocale() as Lang;
   const router = useRouter();
+  const qc = useQueryClient();
   const t = useTranslations("common");
   return (
     <label className="relative inline-flex items-center">
@@ -28,7 +30,7 @@ export function LangSwitcher() {
       <Globe className="pointer-events-none absolute left-3 h-4 w-4" aria-hidden />
       <select
         value={locale}
-        onChange={(e) => { setLocaleCookie(e.target.value as Lang); router.refresh(); }}
+        onChange={(e) => { setLocaleCookie(e.target.value as Lang); router.refresh(); qc.invalidateQueries(); }}
         className="h-10 cursor-pointer appearance-none rounded-full bg-white pl-9 pr-4 text-sm font-semibold shadow-clay-sm outline-none"
       >
         {(Object.keys(LANG_LABEL) as Lang[]).map((l) => (
@@ -36,13 +38,5 @@ export function LangSwitcher() {
         ))}
       </select>
     </label>
-  );
-}
-
-export function DemoBanner() {
-  return (
-    <div role="note" className="bg-sun px-4 py-1.5 text-center text-xs font-bold text-ink">
-      DEMO MODE: synthetic data only. No real backend, no real AI analysis, no real legal information.
-    </div>
   );
 }

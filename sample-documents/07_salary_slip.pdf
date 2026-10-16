@@ -1,0 +1,52 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+6 0 obj
+<< /Length 1007 >>
+stream
+0.85 0.85 0.85 RG 2 w 30 30 535 782 re S
+BT /F2 60 Tf 0.93 0.93 0.93 rg 1 0 0 1 120 380 Tm (SAMPLE - SYNTHETIC) Tj ET
+BT /F2 16.0 Tf 0 0 0 rg 1 0 0 1 50 766.0 Tm (Sahyadri Infotech Pvt Ltd) Tj ET
+BT /F2 11.0 Tf 0 0 0 rg 1 0 0 1 50 749.5 Tm (Salary Slip for September 2026) Tj ET
+BT /F1 11.0 Tf 0 0 0 rg 1 0 0 1 50 733.0 Tm (SAMPLE - SYNTHETIC DOCUMENT FOR CHILD CONNECT TESTING) Tj ET
+BT /F1 11.0 Tf 0 0 0 rg 1 0 0 1 50 706.5 Tm (Employee Name: Rahul Sharma) Tj ET
+BT /F1 11.0 Tf 0 0 0 rg 1 0 0 1 50 690.0 Tm (Employee ID: EMP10007) Tj ET
+BT /F1 11.0 Tf 0 0 0 rg 1 0 0 1 50 673.5 Tm (Gross Salary: Rs 120000) Tj ET
+BT /F1 11.0 Tf 0 0 0 rg 1 0 0 1 50 657.0 Tm (Deductions \(PF, professional tax, TDS\): Rs 15000) Tj ET
+BT /F1 11.0 Tf 0 0 0 rg 1 0 0 1 50 640.5 Tm (Net Pay: Rs 105000) Tj ET
+BT /F1 11.0 Tf 0 0 0 rg 1 0 0 1 50 624.0 Tm (Date: 2026-10-16) Tj ET
+BT /F1 8 Tf 0.4 0.4 0.4 rg 1 0 0 1 50 40 Tm (SAMPLE document generated for Child Connect testing. Not a real document. Salary slip \(sample\)) Tj ET
+endstream
+endobj
+7 0 obj
+<< /Title (Salary slip \(sample\)) /Producer (Child Connect sample generator) >>
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000121 00000 n 
+0000000257 00000 n 
+0000000354 00000 n 
+0000000456 00000 n 
+0000001514 00000 n 
+trailer
+<< /Size 8 /Root 1 0 R /Info 7 0 R >>
+startxref
+1610
+%%EOF

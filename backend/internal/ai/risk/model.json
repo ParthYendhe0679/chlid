@@ -1,0 +1,80 @@
+{
+  "name": "deadline-risk-logreg",
+  "version": "1.0",
+  "trained_on": "2026-10-16",
+  "data": "SYNTHETIC: 5000 generated deadlines (ml/generate_synthetic.py). Not real case data.",
+  "features": [
+    "days_elapsed_ratio",
+    "agency_open_cases",
+    "agency_staff_count",
+    "agency_past_late_rate",
+    "docs_reupload_count",
+    "step_HSR",
+    "step_CSR_MER",
+    "step_MATCHING",
+    "step_DM_FILING",
+    "step_DM_ORDER",
+    "step_FOLLOWUP",
+    "parent_reply_delay_days"
+  ],
+  "mean": [
+    0.622658,
+    38.9976,
+    4.661333,
+    0.339081,
+    0.377867,
+    0.2248,
+    0.071467,
+    0.073867,
+    0.079733,
+    0.158133,
+    0.189067,
+    2.531427
+  ],
+  "scale": [
+    0.285247,
+    25.588888,
+    2.244632,
+    0.139198,
+    0.613528,
+    0.417451,
+    0.257603,
+    0.261554,
+    0.27088,
+    0.364866,
+    0.391562,
+    2.046026
+  ],
+  "coef": [
+    0.941245,
+    0.072969,
+    -0.230151,
+    0.53165,
+    0.263422,
+    0.582844,
+    0.273785,
+    0.104352,
+    0.197092,
+    0.520595,
+    0.296809,
+    0.277701
+  ],
+  "intercept": 0.572255,
+  "high_risk_threshold": 0.6,
+  "positive_rate": 0.6056,
+  "metrics_test_synthetic": {
+    "logistic_regression": {
+      "accuracy": 0.7344,
+      "precision": 0.7693,
+      "recall": 0.8018,
+      "roc_auc": 0.7986
+    },
+    "gradient_boosting_comparison": {
+      "accuracy": 0.7208,
+      "precision": 0.7602,
+      "recall": 0.7873,
+      "roc_auc": 0.7908
+    },
+    "test_rows": 1250
+  }
+}

@@ -180,10 +180,13 @@ export function KnowledgePage() {
   const t = useTranslations("admin");
   const fe = useFieldError();
   const toast = useToast();
+  const qc = useQueryClient();
+  const locale = useLocale();
+  const sources = useQuery({ queryKey: ["admin", "knowledge"], queryFn: ({ signal }) => adminApi.knowledge(signal) });
   const { register, handleSubmit, reset, formState: { errors } } = useForm<z.infer<typeof knowledgeSchema>>({ resolver: zodResolver(knowledgeSchema), defaultValues: { language: "en" } });
   const m = useMutation({
     mutationFn: (v: z.infer<typeof knowledgeSchema>) => adminApi.addKnowledge({ ...v, source_url: v.source_url || undefined }),
-    onSuccess: (r) => { toast({ tone: "success", title: t("kbDone", { count: r.chunks_created }) }); reset(); },
+    onSuccess: (r) => { toast({ tone: "success", title: t("kbDone", { count: r.chunks_created }) }); reset(); qc.invalidateQueries({ queryKey: ["admin", "knowledge"] }); },
     onError: (e) => toast({ tone: "error", title: t("kbFailed"), body: e.message }),
   });
   return (
@@ -202,6 +205,25 @@ export function KnowledgePage() {
           <InlineAlert tone="info">{t("kbActive")}</InlineAlert>
         </form>
       </Card>
+      <Card variant="bento" className="mt-6 max-w-3xl">
+        <h2 className="text-lg font-bold">{t("kbSources")}</h2>
+        {sources.isPending && <Skeleton className="mt-3 h-24" />}
+        {sources.isError && <ErrorState compact error={sources.error} onRetry={() => sources.refetch()} />}
+        {sources.isSuccess && sources.data.length === 0 && <EmptyState title={t("kbNone")} />}
+        {sources.isSuccess && sources.data.length > 0 && (
+          <ul className="mt-3 divide-y divide-line">
+            {sources.data.map((s) => (
+              <li key={s.source_title + s.language + s.embed_model} className="flex flex-wrap items-center justify-between gap-2 py-3 text-sm">
+                <div>
+                  <p className="font-semibold">{s.source_title}</p>
+                  <p className="text-xs text-muted">{t("kbModel", { model: s.embed_model })} | {formatDate(s.added_at, locale)}</p>
+                </div>
+                <div className="flex items-center gap-2"><Badge tone="info">{s.language.toUpperCase()}</Badge><Badge tone="purple">{t("kbParts", { count: s.chunks })}</Badge></div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </Card>
     </>
   );
 }
@@ -209,7 +231,14 @@ export function KnowledgePage() {
 export function ScamReportsPage() {
   const t = useTranslations("admin");
   const locale = useLocale();
+  const toast = useToast();
+  const qc = useQueryClient();
   const q = useQuery({ queryKey: ["admin", "scams"], queryFn: ({ signal }) => adminApi.scamReports(signal) });
+  const mark = useMutation({
+    mutationFn: ({ id, reviewed }: { id: string; reviewed: boolean }) => adminApi.markScamReviewed(id, reviewed),
+    onSuccess: () => { toast({ tone: "success", title: t("reviewUpdated") }); qc.invalidateQueries({ queryKey: ["admin", "scams"] }); },
+    onError: (e) => toast({ tone: "error", title: t("updateFailed"), body: e.message }),
+  });
   return (
     <>
       <PageHead kicker={t("kicker")} title={t("scamsTitle")} subtitle={t("scamsSubtitle")} />
@@ -221,10 +250,21 @@ export function ScamReportsPage() {
           {q.data.map((r) => (
             <li key={r.id}>
               <Card variant="bento">
-                <div className="flex flex-wrap items-center justify-between gap-2"><Badge tone={r.verdict === "LIKELY_SCAM" ? "danger" : "warning"}>{r.verdict}</Badge><span className="text-xs text-muted">{formatDateTime(r.created_at, locale)}</span></div>
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <div className="flex items-center gap-2">
+                    <Badge tone={r.verdict === "LIKELY_SCAM" ? "danger" : "warning"}>{r.verdict}</Badge>
+                    <Badge tone={r.reviewed ? "success" : "info"}>{r.reviewed ? t("reviewedBadge") : t("newBadge")}</Badge>
+                  </div>
+                  <span className="text-xs text-muted">{formatDateTime(r.created_at, locale)}</span>
+                </div>
                 <p className="mt-3 whitespace-pre-wrap break-words rounded-2xl bg-canvas p-3 text-sm">{r.text}</p>
                 {r.reasons.length > 0 && <ul className="mt-2 list-disc pl-5 text-xs text-ink-soft">{r.reasons.map((x) => <li key={x}>{x}</li>)}</ul>}
-                <p className="mt-2 text-[11px] text-muted">{t("aiSuspicion")}</p>
+                <div className="mt-2 flex flex-wrap items-center justify-between gap-2">
+                  <p className="text-[11px] text-muted">{t("aiSuspicion")}</p>
+                  <Button size="sm" variant={r.reviewed ? "ghost" : "outline"} disabled={mark.isPending} onClick={() => mark.mutate({ id: r.id, reviewed: !r.reviewed })}>
+                    {r.reviewed ? t("markUnreviewed") : t("markReviewed")}
+                  </Button>
+                </div>
               </Card>
             </li>
           ))}

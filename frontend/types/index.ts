@@ -78,7 +78,7 @@ export interface ApplicationInput {
   annual_income_inr?: number;
   state: string;
   district: string;
-  address?: string; // PROPOSED: guide stores address_enc but does not list the request field name
+  address?: string | null; // agreed: request field "address", stored encrypted as address_enc
   pref_age_group: AgeGroup;
   pref_gender: "ANY" | "MALE" | "FEMALE";
   pref_states: string[];
@@ -139,8 +139,8 @@ export interface HsrSections {
   family_background: string; home_environment: string; health: string; finances: string;
   motivation_readiness: string; parenting_plan: string; support_system: string; observations: string;
 }
-export interface HsrDraft { sections: HsrSections; missing_items: string[]; completeness_score: number; ai_run_id: string }
-export interface FollowupDraft { sections: Record<string, string>; concern_flags: string[]; ai_run_id: string }
+export interface HsrDraft { sections: HsrSections; missing_items: string[]; completeness_score: number; ai_run_id: string; model?: string }
+export interface FollowupDraft { sections: Record<string, string>; concern_flags: string[]; ai_run_id: string; model?: string }
 
 // ---- agency ----
 export interface AgencyCaseListItem {
@@ -192,4 +192,9 @@ export interface AuditEntry {
   id: number; actor_id?: string | null; actor_role?: Role | null; action: string; target_type: string;
   target_id: string; created_at: string; meta?: Record<string, unknown>;
 }
+export interface AppNotification {
+  id: string; type: string; title: string; body: string; link?: string | null; read_at?: string | null; created_at: string;
+}
+export interface NotificationList { items: AppNotification[]; unread: number }
+export interface KnowledgeSource { source_title: string; language: string; embed_model: string; chunks: number; added_at: string; source_url?: string | null }
 export interface AuditVerify { valid: boolean; rows_checked?: number; broken_at_id?: number }

@@ -3,8 +3,6 @@ import { Unbounded, Poppins, Lobster } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 import { Providers } from "@/components/layout/providers";
-import { DemoBanner } from "@/components/layout/brand";
-import { DEMO_MODE } from "@/lib/api/client";
 import "./globals.css";
 
 const unbounded = Unbounded({ variable: "--font-unbounded", subsets: ["latin"], weight: ["500", "600", "700", "800"], display: "swap" });
@@ -24,7 +22,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang={locale} className={`${unbounded.variable} ${poppins.variable} ${lobster.variable}`}>
       <body className="min-h-dvh">
         <NextIntlClientProvider locale={locale} messages={messages}>
-          {DEMO_MODE && <DemoBanner />}
           <Providers>{children}</Providers>
         </NextIntlClientProvider>
       </body>

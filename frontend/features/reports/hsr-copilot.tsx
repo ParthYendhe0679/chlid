@@ -43,6 +43,7 @@ export function HsrCopilot({ detail }: { detail: AgencyCaseDetail }) {
   const [missing, setMissing] = React.useState<string[]>(hsr?.missing_items ?? []);
   const [score, setScore] = React.useState<number | null>(hsr?.completeness_score ?? null);
   const [aiRunId, setAiRunId] = React.useState<string | null>(hsr?.ai_run_id ?? hsr?.ai_draft?.ai_run_id ?? null);
+  const [model, setModel] = React.useState<string | null>(hsr?.ai_draft?.model ?? null);
   const [visitDate, setVisitDate] = React.useState(hsr?.visit_date ?? "");
   const [recommendation, setRecommendation] = React.useState<Recommendation | "">(hsr?.recommendation ?? "");
   const [savedAt, setSavedAt] = React.useState<string | null>(null);
@@ -79,6 +80,7 @@ export function HsrCopilot({ detail }: { detail: AgencyCaseDetail }) {
       setMissing(res.missing_items);
       setScore(res.completeness_score);
       setAiRunId(res.ai_run_id);
+      setModel(res.model ?? null);
       setVisitDate(v.visit_date);
       toast({ tone: "ai", title: t("draftReady"), body: t("draftReadyBody") });
     },
@@ -111,6 +113,8 @@ export function HsrCopilot({ detail }: { detail: AgencyCaseDetail }) {
   });
 
   const emptyRequired = HSR_SECTIONS.filter((k) => !sections[k].trim());
+  // Missing items reported by the draft disappear as soon as the social worker fills them in.
+  const stillMissing = missing.filter((m) => !(HSR_SECTIONS as string[]).includes(m) || !sections[m as keyof HsrSections].trim());
   const canSign = !signed && !dirty && !!recommendation && !!aiRunId && hasContent && !!visitDate;
 
   if (detail.status !== "HSR_IN_PROGRESS" && !hsr) {
@@ -154,15 +158,16 @@ export function HsrCopilot({ detail }: { detail: AgencyCaseDetail }) {
           <h3 className="flex items-center gap-2 text-lg font-bold"><FilePenLine className="h-5 w-5" aria-hidden /> {t("reportTitle")}</h3>
           <div className="flex flex-wrap items-center gap-2">
             {aiDraft && <Badge tone="purple">{t("aiDraftBadge")}</Badge>}
+            {aiDraft && model && <Badge tone="neutral" dot={false}><span className="font-mono">{model}</span></Badge>}
             {dirty && <Badge tone="warning">{t("unsaved")}</Badge>}
             {!dirty && savedAt && <Badge tone="success">{t("savedAt", { date: formatDateTime(savedAt, locale) })}</Badge>}
             {score !== null && <Badge tone={score >= 80 ? "success" : "warning"}>{t("completeness", { score })}</Badge>}
           </div>
         </div>
 
-        {missing.length > 0 && (
+        {!signed && stillMissing.length > 0 && (
           <InlineAlert tone="warning" className="mb-4" title={t("missingTitle")}>
-            <ul className="mt-1 list-disc pl-5">{missing.map((m) => <li key={m}>{t.has(`sections.${m}`) ? t(`sections.${m}`) : m}</li>)}</ul>
+            <ul className="mt-1 list-disc pl-5">{stillMissing.map((m) => <li key={m}>{t.has(`sections.${m}`) ? t(`sections.${m}`) : m}</li>)}</ul>
             <p className="mt-1 text-xs">{t("missingNote")}</p>
           </InlineAlert>
         )}

@@ -1,0 +1,53 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+6 0 obj
+<< /Length 1142 >>
+stream
+0.85 0.85 0.85 RG 2 w 30 30 535 782 re S
+BT /F2 60 Tf 0.93 0.93 0.93 rg 1 0 0 1 120 380 Tm (SAMPLE - SYNTHETIC) Tj ET
+BT /F2 16.0 Tf 0 0 0 rg 1 0 0 1 50 766.0 Tm (Maharashtra State Electricity Distribution Co. Ltd \(MSEDCL\)) Tj ET
+BT /F2 11.0 Tf 0 0 0 rg 1 0 0 1 50 749.5 Tm (Electricity Bill - Residential) Tj ET
+BT /F1 11.0 Tf 0 0 0 rg 1 0 0 1 50 733.0 Tm (SAMPLE - SYNTHETIC DOCUMENT FOR CHILD CONNECT TESTING) Tj ET
+BT /F1 11.0 Tf 0 0 0 rg 1 0 0 1 50 706.5 Tm (Consumer Name: Rahul Sharma) Tj ET
+BT /F1 11.0 Tf 0 0 0 rg 1 0 0 1 50 690.0 Tm (Consumer No: 170000055433) Tj ET
+BT /F1 11.0 Tf 0 0 0 rg 1 0 0 1 50 673.5 Tm (Address: B-12, Shanti Nagar, Mira Road East, Thane 401107) Tj ET
+BT /F1 11.0 Tf 0 0 0 rg 1 0 0 1 50 657.0 Tm (Bill Date: 2026-09-26) Tj ET
+BT /F1 11.0 Tf 0 0 0 rg 1 0 0 1 50 640.5 Tm (Units Consumed: 157 kWh) Tj ET
+BT /F1 11.0 Tf 0 0 0 rg 1 0 0 1 50 624.0 Tm (Amount Payable: Rs 1107) Tj ET
+BT /F1 11.0 Tf 0 0 0 rg 1 0 0 1 50 607.5 Tm (Due Date: 2026-10-14) Tj ET
+BT /F1 8 Tf 0.4 0.4 0.4 rg 1 0 0 1 50 40 Tm (SAMPLE document generated for Child Connect testing. Not a real document. Electricity bill \(sample\)) Tj ET
+endstream
+endobj
+7 0 obj
+<< /Title (Electricity bill \(sample\)) /Producer (Child Connect sample generator) >>
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000121 00000 n 
+0000000257 00000 n 
+0000000354 00000 n 
+0000000456 00000 n 
+0000001649 00000 n 
+trailer
+<< /Size 8 /Root 1 0 R /Info 7 0 R >>
+startxref
+1750
+%%EOF
