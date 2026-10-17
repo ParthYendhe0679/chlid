@@ -48,3 +48,21 @@ Admin: `GET /admin/radar`, `/admin/agency-scorecard`, `/admin/child-alerts`, `/a
 2. Are report URLs (`csr_url`, `mer_url`) already pre-signed with 5-minute expiry? (Frontend offers "Refresh links".)
 3. Should Sahayak responses support streaming? (Not in the guide; frontend shows a typing indicator and the full JSON answer.)
 4. Does the agency `GET /documents/:id/url` work for agency users of the same agency? (Used in document review.)
+
+## Backend decisions (Go API, October 2026)
+
+Implemented: P1, P2, P3, P4, P5, P6, P7, P9, P10, P11 (`address`), P12, P14. Not implemented: P8 (no email service),
+P13 (DocCheck stays one synchronous request, as in guide 15.4).
+
+Answers to the open questions:
+
+1. Yes. The server alone enforces the 48-hour window: decisions after `expires_at` get 409, and the background job
+   expires pending referrals (counts as a used referral; the third one debars for 1 year).
+2. Yes. `csr_url`, `mer_url` and `GET /documents/:id/url` are HMAC-signed links valid for 5 minutes, created only
+   after a permission check, and every request is written to the audit log.
+3. No streaming. `POST /ai/assistant` returns the full JSON answer.
+4. Yes. Agency users can open documents of applications that belong to their own agency (403 otherwise).
+
+Other behaviour: `/auth/me` returns `{ user }`; `GET /referrals/active` returns `null` with 200 when there is none;
+`GET /applications/me` returns 404 before the profile exists; server messages follow the `cc_locale` cookie
+(en/hi/mr) and fall back to the user's language.

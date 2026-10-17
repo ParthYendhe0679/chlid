@@ -95,7 +95,7 @@ function DocRow({ doc, label, busy, onVerify, onReupload }: { doc: CaseDocument;
             // eslint-disable-next-line @next/next/no-img-element
             <img src={preview.url} alt={label} className="max-h-96 w-full rounded-xl object-contain" referrerPolicy="no-referrer" />
           ) : (
-            <iframe src={preview.url} title={label} sandbox="" referrerPolicy="no-referrer" className="h-96 w-full rounded-xl bg-white" />
+            <iframe src={preview.url} title={label} referrerPolicy="no-referrer" className="h-96 w-full rounded-xl bg-white" />
           )}
           <p className="mt-2 text-[11px] text-muted">{t("linkExpires")}</p>
         </div>

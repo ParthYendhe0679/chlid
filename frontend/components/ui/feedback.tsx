@@ -80,6 +80,9 @@ export function ErrorState({ error, onRetry, compact }: { error: unknown; onRetr
     <div role="alert" className={cn("rounded-[28px] border-2 border-dashed border-danger/30 bg-danger-soft/40 text-center", compact ? "px-4 py-5" : "px-6 py-10")}>
       {forbidden ? <ShieldAlert className="mx-auto mb-2 h-6 w-6 text-danger" aria-hidden /> : <XCircle className="mx-auto mb-2 h-6 w-6 text-danger" aria-hidden />}
       <p className="font-semibold text-ink">{msg}</p>
+      {e && e.message && e.message !== msg && ["FORBIDDEN", "NOT_FOUND", "AI_UNAVAILABLE", "INVALID_TRANSITION"].includes(e.code) && (
+        <p className="mx-auto mt-1 max-w-md text-sm text-muted">{e.message}</p>
+      )}
       {e?.requestId && <p className="mt-1 font-mono text-[11px] text-muted">ref: {e.requestId}</p>}
       {onRetry && !forbidden && (
         <Button variant="secondary" size="sm" className="mt-4" onClick={onRetry}>

@@ -1,5 +1,5 @@
 import { api } from "./client";
-import type { AdminAgency, AgencyScore, AuditEntry, AuditVerify, ChildAlert, RadarResponse, ScamReport } from "@/types";
+import type { AdminAgency, AgencyScore, AuditEntry, AuditVerify, ChildAlert, KnowledgeSource, RadarResponse, ScamReport } from "@/types";
 
 export const adminApi = {
   radar: (params: { agency_id?: string; step?: string; level?: string }, signal?: AbortSignal) =>
@@ -12,6 +12,8 @@ export const adminApi = {
   addKnowledge: (body: { source_title: string; source_url?: string; language: string; text: string }) =>
     api<{ chunks_created: number }>("/admin/knowledge", { method: "POST", body, timeoutMs: 120_000 }),
   scamReports: (signal?: AbortSignal) => api<ScamReport[]>("/admin/scam-reports", { signal }),
+  markScamReviewed: (id: string, reviewed: boolean) => api<{ ok: boolean }>(`/admin/scam-reports/${id}`, { method: "PATCH", body: { reviewed } }),
+  knowledge: (signal?: AbortSignal) => api<KnowledgeSource[]>("/admin/knowledge", { signal }),
   audit: (params: { actor?: string; action?: string; from?: string; to?: string }, signal?: AbortSignal) =>
     api<AuditEntry[]>("/admin/audit", { query: params, signal }),
   verifyAudit: () => api<AuditVerify>("/admin/audit/verify", { timeoutMs: 60_000 }),

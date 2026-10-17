@@ -1,0 +1,4 @@
+.env
+uploads/
+*.exe
+ml/synthetic_deadlines.csv

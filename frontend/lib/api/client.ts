@@ -1,7 +1,6 @@
 import { ApiError, parseApiError } from "./errors";
 
 export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080/api/v1";
-export const DEMO_MODE = process.env.NEXT_PUBLIC_DEMO_MODE === "true";
 
 export const SESSION_EXPIRED_EVENT = "cc:session-expired";
 
@@ -26,11 +25,6 @@ function buildUrl(path: string, query?: Query) {
   return s ? `${url}?${s}` : url;
 }
 
-async function demoRoute<T>(method: string, path: string, body: unknown, query?: Query): Promise<T> {
-  const { demoRequest } = await import("@/lib/demo/handlers");
-  return (await demoRequest(method, path, body, query)) as T;
-}
-
 let refreshing: Promise<boolean> | null = null;
 async function refreshSession(): Promise<boolean> {
   refreshing ??= fetch(buildUrl("/auth/refresh"), { method: "POST", credentials: "include" })
@@ -47,7 +41,6 @@ export function notifySessionExpired() {
 /** Typed JSON request. Only idempotent GETs are ever retried (once, on network failure). */
 export async function api<T>(path: string, opts: RequestOptions = {}): Promise<T> {
   const method = opts.method ?? "GET";
-  if (DEMO_MODE) return demoRoute<T>(method, path, opts.body, opts.query);
 
   const attempt = async (): Promise<T> => {
     const ctrl = new AbortController();
@@ -108,7 +101,6 @@ export function uploadForm<T>(
   form: FormData,
   opts: { onProgress?: (fraction: number) => void; signal?: AbortSignal; timeoutMs?: number } = {},
 ): Promise<T> {
-  if (DEMO_MODE) return demoRoute<T>("POST", path, form).then((r) => { opts.onProgress?.(1); return r; });
   return new Promise<T>((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", buildUrl(path));
