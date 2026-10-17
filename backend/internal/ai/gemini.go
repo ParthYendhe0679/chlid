@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"log/slog"
 	"strings"
 	"time"
 
@@ -61,7 +62,7 @@ func (g *Gemini) JSON(ctx context.Context, system string, parts []*genai.Part, s
 		ResponseSchema:    schema,
 		Temperature:       genai.Ptr[float32](0.2),
 	}
-	return retry(ctx, func(c context.Context) error {
+	err := retry(ctx, func(c context.Context) error {
 		resp, err := g.client.Models.GenerateContent(c, g.Model, []*genai.Content{genai.NewContentFromParts(parts, genai.RoleUser)}, cfg)
 		if err != nil {
 			return err
@@ -73,6 +74,10 @@ func (g *Gemini) JSON(ctx context.Context, system string, parts []*genai.Part, s
 		}
 		return nil
 	})
+	if err != nil {
+		slog.Warn("gemini call failed; using fallback", "model", g.Model, "err", err)
+	}
+	return err
 }
 
 // Embed returns 768-number embeddings (gemini-embedding-001, section 8.2).

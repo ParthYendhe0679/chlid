@@ -36,7 +36,7 @@ func Load() (*Config, error) {
 		DatabaseURLDirect: os.Getenv("DATABASE_URL_DIRECT"),
 		JWTSecret:         os.Getenv("JWT_SECRET"),
 		GeminiAPIKey:      os.Getenv("GEMINI_API_KEY"),
-		GeminiModel:       env("GEMINI_MODEL", "gemini-2.5-flash"),
+		GeminiModel:       env("GEMINI_MODEL", "gemini-3.5-flash"),
 		EmbedModel:        env("EMBED_MODEL", "gemini-embedding-001"),
 		FieldKey:          os.Getenv("FIELD_ENCRYPTION_KEY"),
 		StorageDir:        env("STORAGE_DIR", "./uploads"),

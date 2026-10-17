@@ -166,7 +166,7 @@ func (s *Service) generate(ctx context.Context, q, lang string, chunks []chunk) 
 	if err != nil {
 		return Answer{}, err
 	}
-	a := Answer{Answer: strings.TrimSpace(out.Answer), Grounded: out.Grounded && len(out.Passages) > 0}
+	a := Answer{Answer: strings.TrimSpace(passageRef.ReplaceAllString(out.Answer, "")), Grounded: out.Grounded && len(out.Passages) > 0}
 	seen := map[string]bool{}
 	for _, n := range out.Passages {
 		if n < 1 || n > len(chunks) {
@@ -236,6 +236,8 @@ func extractive(q, lang string, chunks []chunk) Answer {
 	}
 	return Answer{Answer: ans, Grounded: true, Citations: []Citation{{best.SourceTitle, best.Citation, best.SourceURL}}}
 }
+
+var passageRef = regexp.MustCompile(`\s*\[\d+(?:\s*,\s*\d+)*\]`)
 
 var sentRe = regexp.MustCompile(`[^.!?।\n]+[.!?।]?`)
 
